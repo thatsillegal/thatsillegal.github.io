@@ -107,6 +107,49 @@ section {
     transform: scale(1.05); /* 鼠标悬停时放大效果 */
 }
 
+/* #contact {
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 40px auto;
+} */
+
+/* #contact h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#contact p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #666;
+} */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-item {
+    font-size: 1em;
+    color: #555; /* 低调的文本颜色 */
+}
+
+.contact-item a {
+    color: #555; /* 链接颜色与文本颜色一致，保持低调 */
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线，轻微强调 */
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .navbar ul {
@@ -129,5 +172,17 @@ section {
     .gallery-item img {
         width: 80%; /* 在手机等小屏设备上缩小图片尺寸 */
         margin: 0 auto; /* 居中图片 */
+    }
+
+    .contact-info {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .contact-item {
+        flex: 1;
+        text-align: left;
     }
 }
