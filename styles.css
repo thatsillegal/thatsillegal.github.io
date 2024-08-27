@@ -6,7 +6,7 @@ body, html {
 }
 
 .hero-image {
-    background-image: url('background-image.jpg'); /* 在此处替换为你实际的背景图路径 */
+    background-image: url('./images/background-image.jpg'); /* 在此处替换为你实际的背景图路径 */
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -37,6 +37,10 @@ body, html {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: row; /* 明确设置为横向排列 */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* 防止换行 */
 }
 
 .navbar li {
@@ -60,13 +64,13 @@ section {
     min-height: 100vh;
 }
 
-#home {
-    background-color: #f4f4f4;
+#works {
+    transition: max-height 0.3s ease;
 }
 
 #about {
     /* background-color: #e2e2e2; */
-    background-image: url('AboutMe.jpg');
+    background-image: url('./images/AboutMe.jpg');
     background-size: cover;
     background-position: center;
     color: white; /* 确保文本在背景图片上清晰可见 */
@@ -84,34 +88,80 @@ section {
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 适应不同屏幕尺寸 */
-    gap: 10px; /* 图片间距 */
-    padding: 20px;
+    gap: 20px;
+    justify-content: center;
+    overflow: hidden; /* 隐藏超出部分 */
 }
 
 .gallery-item {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.2s ease-in-out;
-    max-width: 100%; /* 确保图片不会超出父容器的宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; /* 自动调整高度以保持图片比例 */
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.gallery-item:hover {
-    transform: scale(1.05); /* 鼠标悬停时放大效果 */
+.load-more-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: #d18c00;
+}
+
+
+.gallery-item h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.gallery-item p {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+/* 大屏幕: 每行显示至少8个图片，每个图片至少200px宽 */
+@media (min-width: 1025px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 400px)); /* 每行至少200px宽 */
+    }
+}
+
+/* 中等屏幕: 每行显示至少4-6个图片，每个图片至少200px宽 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* 每行至少200px宽 */
+    }
+}
+
+/* 小屏幕: 每行显示2个图片 */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 每行2列 */
+    }
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
 }
 
 .contact-item {
@@ -131,12 +181,16 @@ section {
 /* 响应式设计 */
 @media (max-width: 768px) {
     .navbar ul {
-        flex-direction: column;
-        align-items: center;
+        justify-content: space-around; /* 调整对齐方式以适应小屏幕 */
+        padding: 0 10px; /* 增加左右间距，防止文字太靠边 */
+    }
+
+    .navbar a {
+        font-size: 16px; /* 在小屏幕上稍微缩小字体 */
     }
 
     .navbar li {
-        margin: 10px 0;
+        margin: 0 10px;
     }
 
     .hero-text h1 {
@@ -145,11 +199,6 @@ section {
 
     .hero-text p {
         font-size: 18px;
-    }
-
-    .gallery-item img {
-        width: 80%; /* 在手机等小屏设备上缩小图片尺寸 */
-        margin: 0 auto; /* 居中图片 */
     }
 
     .contact-info {
