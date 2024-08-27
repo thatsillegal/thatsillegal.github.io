@@ -65,7 +65,13 @@ section {
 }
 
 #about {
-    background-color: #e2e2e2;
+    /* background-color: #e2e2e2; */
+    background-image: url('AboutMe.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* 确保文本在背景图片上清晰可见 */
+    padding: 60px 20px; /* 添加一些内边距，让内容和背景图片有一些间距 */
+    text-align: center;
 }
 
 #blog {
