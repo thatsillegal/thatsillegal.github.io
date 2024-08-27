@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - 作品展示</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-description {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .project-description h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .project-description p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .project-image {
+                width: 50%;
+            }
+
+            .project-description {
+                width: 50%;
+                padding-left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-description h2 {
+                font-size: 1.5em;
+            }
+
+            .project-description p {
+                font-size: 0.9em;
+            }
+        }
+
+        .lang-toggle {
+            text-align: right;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .lang-toggle a {
+            margin-left: 10px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .lang-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-home a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-toggle">
+            <a href="#en" onclick="toggleLang('en')">English</a> | <a href="#zh" onclick="toggleLang('zh')">中文</a>
+        </div>
+        <div class="content">
+            <img src="project1-thumbnail.jpg" alt="Project 1" class="project-image">
+
+            <div id="en" class="project-description">
+                <h2>Project 1: Modern Cover Design</h2>
+                <p>The cover design is inspired by simple lines, showing the modern, inclusive and humanistic characteristics of the Fifth Generation Hospital.</p>
+            </div>
+
+            <div id="zh" class="project-description" style="display:none;">
+                <h2>项目1：现代感封面设计</h2>
+                <p>该封面设计以简洁的线条为灵感，展现了第五代医院现代、包容、人性化的特点</p>
+            </div>
+        </div>
+
+         <!-- 返回首页按钮 -->
+         <div class="back-home">
+            <a href="../../index.html">返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleLang(lang) {
+            document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('zh').style.display = lang === 'zh' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
