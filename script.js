@@ -107,8 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function adjustHeight() {
-        const galleryHeight = gallery.scrollHeight;
-        const headerHeight = header.getBoundingClientRect().height;
+        const galleryHeight = gallery.height;
+        const headerHeight = header.height;
+        const buttonHeight = loadMoreButton.height;
 
         // 获取 worksSection 的内边距和外边距
         const worksStyles = window.getComputedStyle(worksSection);
@@ -120,11 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalPaddingMargin = paddingTop + paddingBottom + marginTop + marginBottom;
 
         // 计算总高度
-        const totalHeight = galleryHeight + headerHeight + totalPaddingMargin;
+        const totalHeight = galleryHeight + headerHeight + buttonHeight + totalPaddingMargin;
 
         // 设置 worksSection 的最大高度
         worksSection.style.maxHeight = `${totalHeight}px`;
-        gallery.style.maxHeight = `${galleryHeight}px`; // 同步调整 gallery 的高度
+        // gallery.style.maxHeight = `${galleryHeight}px`; // 同步调整 gallery 的高度
     }
 
     function checkIfMoreItemsToShow() {
