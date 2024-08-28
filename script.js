@@ -44,107 +44,79 @@ const works = [
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.navbar a');
+    const sections = document.querySelectorAll('section');
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            window.scrollTo({
-                top: targetSection.offsetTop,
-                behavior: 'smooth'
-            });
+    function adjustSectionHeights() {
+        const viewportHeight = window.innerHeight;
+        sections.forEach(section => {
+            section.style.height = `${viewportHeight - navbarHeight}px`;
         });
-    });
+    }
 
-    // 首页作品展示部分
+    adjustSectionHeights();
+    window.addEventListener('resize', adjustSectionHeights);
+
     const gallery = document.querySelector('.gallery');
-    const loadMoreButton = document.getElementById('load-more');
-    const worksSection = document.getElementById('works');
-    const header = worksSection.querySelector('h2');
-    let itemsDisplayed = 0;
-    const rowsToShow = 1; // 每次加载的行数
-
-    function getItemsPerRow() {
+    works.forEach(work => {
         const item = document.createElement('div');
         item.classList.add('gallery-item');
-        item.style.visibility = 'hidden'; // 隐藏虚拟元素
+        item.innerHTML = `
+            <a href="work-template.html?work=${works.indexOf(work)}">
+                <img src="${work.image}" alt="${work.title}">
+            </a>
+            <h3>${work.title}</h3>
+            <p>${work.description}</p>
+        `;
         gallery.appendChild(item);
-        const itemWidth = item.getBoundingClientRect().width;
-        gallery.removeChild(item);
-
-        const galleryWidth = gallery.getBoundingClientRect().width;
-        return Math.floor(galleryWidth / itemWidth);
-    }
-
-    function loadWorks() {
-        const itemsPerRow = getItemsPerRow();
-        const itemsToLoad = rowsToShow * itemsPerRow;
-        const fragment = document.createDocumentFragment();
-
-        for (let i = itemsDisplayed; i < itemsDisplayed + itemsToLoad && i < works.length; i++) {
-            const item = document.createElement('div');
-            item.classList.add('gallery-item');
-            item.innerHTML = `
-                <a href="./works/work-template.html?work=${i}">
-                    <img src="${works[i].image}" alt="${works[i].title}">
-                </a>
-                <h3>${works[i].title}</h3>
-                <p>${works[i].description}</p>
-            `;
-            fragment.appendChild(item);
-        }
-        gallery.appendChild(fragment);
-        itemsDisplayed += itemsToLoad;
-
-        // 调整 gallery 和 works 的高度
-        adjustHeight();
-
-        // 检查是否还有未展示的作品，决定是否显示“查看更多”按钮
-        checkIfMoreItemsToShow();
-    }
-
-    function adjustHeight() {
-        const galleryHeight = gallery.height;
-        const headerHeight = header.height;
-        const buttonHeight = loadMoreButton.height;
-
-        // 获取 worksSection 的内边距和外边距
-        const worksStyles = window.getComputedStyle(worksSection);
-        const paddingTop = parseFloat(worksStyles.paddingTop);
-        const paddingBottom = parseFloat(worksStyles.paddingBottom);
-        const marginTop = parseFloat(worksStyles.marginTop);
-        const marginBottom = parseFloat(worksStyles.marginBottom);
-
-        const totalPaddingMargin = paddingTop + paddingBottom + marginTop + marginBottom;
-
-        // 计算总高度
-        const totalHeight = galleryHeight + headerHeight + buttonHeight + totalPaddingMargin;
-
-        // 设置 worksSection 的最大高度
-        worksSection.style.maxHeight = `${totalHeight}px`;
-        // gallery.style.maxHeight = `${galleryHeight}px`; // 同步调整 gallery 的高度
-    }
-
-    function checkIfMoreItemsToShow() {
-        // 如果还有未展示的作品，显示“查看更多”按钮
-        if (itemsDisplayed < works.length) {
-            loadMoreButton.style.display = 'block';
-        } else {
-            loadMoreButton.style.display = 'none';
-        }
-    }
-
-    // 初始加载2行
-    loadWorks();
-
-    // 点击按钮加载更多作品
-    loadMoreButton.addEventListener('click', function() {
-        loadWorks(); // 每次加载指定行数的作品
     });
 
-    // 在窗口大小调整时重新检查
-    window.addEventListener('resize', checkIfMoreItemsToShow);
+    // 添加 works 部分的左右箭头点击事件
+    const worksArrowLeft = document.querySelector('#works .arrow-left');
+    const worksArrowRight = document.querySelector('#works .arrow-right');
+
+    worksArrowLeft.addEventListener('click', () => {
+        gallery.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+
+    worksArrowRight.addEventListener('click', () => {
+        gallery.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+
+    // 添加左右箭头点击事件
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    const aboutContent = document.querySelector('.about-content');
+
+    let currentIndex = 0;
+
+    function showContent(index) {
+        const paragraphs = aboutContent.querySelectorAll('p');
+        paragraphs.forEach((p, i) => {
+            p.style.display = i === index ? 'block' : 'none';
+        });
+    }
+
+    arrowLeft.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            showContent(currentIndex);
+        }
+    });
+
+    arrowRight.addEventListener('click', () => {
+        const total = aboutContent.querySelectorAll('p').length;
+        if (currentIndex < total - 1) {
+            currentIndex++;
+            showContent(currentIndex);
+        }
+    });
+
+    showContent(currentIndex);
+    
+    // 鼠标滚轮滚动事件 (用于 works 和 about)
+    gallery.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        gallery.scrollBy({ left: event.deltaY < 0 ? -100 : 100 });
+    });
 });

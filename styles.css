@@ -1,35 +1,28 @@
+/* 通用样式 */
 body, html {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
 }
 
-.hero-image {
-    background-image: url('./images/background-image.jpg'); /* 在此处替换为你实际的背景图路径 */
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    position: relative;
-    color: white;
-    text-align: center;
-}
-
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* 禁止垂直方向溢出 */
+    position: relative; /* 允许在 section 内定位箭头 */
 }
 
 .navbar {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .navbar ul {
@@ -52,173 +45,146 @@ body, html {
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
-    transition: color 0.3s ease;
 }
 
-.navbar a:hover {
-    color: #f0a500;
-}
-
-section {
-    padding: 60px 20px;
-    min-height: 100vh;
-}
-
-#works {
-    transition: max-height 0.3s ease;
-    position: relative; /* 使 #works 成为包含按钮的定位上下文 */
-    overflow: hidden; /* 确保不出现多余的滚动条 */
-    /* display: flex; */
-    flex-direction: column;
-    align-items: center;
-}
-
-#about {
-    /* background-color: #e2e2e2; */
-    background-image: url('./images/AboutMe.jpg');
+.hero-image {
+    background-image: url('./images/background-image.jpg'); /* 在此处替换为你实际的背景图路径 */
     background-size: cover;
     background-position: center;
-    color: white; /* 确保文本在背景图片上清晰可见 */
-    padding: 60px 20px; /* 添加一些内边距，让内容和背景图片有一些间距 */
+    width: 100%;
+    height: 100%;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-}
-
-#blog {
-    background-color: #d0d0d0;
-}
-
-#contact {
-    background-color: #bebebe;
+    color: white;
 }
 
 .gallery {
-    display: grid;
+    display: flex;
+    overflow-x: auto; /* 横向滚动 */
     gap: 20px;
-    justify-content: center;
+    padding: 20px;
+    scroll-snap-type: x mandatory; /* 滚动对齐 */
+    -ms-overflow-style: none;  /* IE 和 Edge 隐藏滚动条 */
+    scrollbar-width: none;  /* Firefox 隐藏滚动条 */
+}
+
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.gallery::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 和 Opera 隐藏滚动条 */
 }
 
 .gallery-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex: 0 0 auto; /* 确保每个项目不缩放 */
+    width: 200px; /* 可以根据需要调整宽度 */
+    scroll-snap-align: center; /* 滚动到项目时居中 */
 }
 
 .gallery-item img {
     width: 100%;
-    height: auto; /* 自动调整高度以保持图片比例 */
-    display: block;
+    height: auto;
+    object-fit: cover; /* 确保图片自动缩放并适应容器 */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.load-more-button {
-display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #f0a500;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-
+/* 左右箭头样式 */
+.arrow-left, .arrow-right {
     position: absolute;
-    bottom: 20px; /* 将按钮固定在 #works 底部 */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
+}
+
+/* About Section 样式 */
+#about {
+    height: 100vh;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.about-bg {
+    background-image: url('./images/AboutMe.jpg'); /* 替换为你的背景图路径 */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.about-textbox {
+    position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    width: 50%;
+    max-height: 50%;
+    overflow-y: auto;
+    border-radius: 8px;
 }
 
-.load-more-button:hover {
-    background-color: #d18c00;
-}
-
-
-.gallery-item h3 {
-    margin: 10px 0;
-    font-size: 18px;
-    text-align: center;
-}
-
-.gallery-item p {
-    font-size: 14px;
-    color: #555;
-    text-align: center;
-}
-
-/* 大屏幕: 每行显示至少8个图片，每个图片至少200px宽 */
-@media (min-width: 1025px) {
-    .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 400px)); /* 每行至少200px宽 */
-    }
-}
-
-/* 中等屏幕: 每行显示至少4-6个图片，每个图片至少200px宽 */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* 每行至少200px宽 */
-    }
-}
-
-/* 小屏幕: 每行显示2个图片 */
-@media (max-width: 768px) {
-    .gallery {
-        grid-template-columns: repeat(2, 1fr); /* 每行2列 */
-    }
-}
-
-.contact-info {
+.about-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
 }
 
-.contact-item {
-    font-size: 1em;
-    color: #555; /* 低调的文本颜色 */
+/* Blog Section 样式 */
+#about, #blog {
+    overflow-x: auto; /* 横向滚动 */
+    white-space: nowrap;
+    padding: 20px;
 }
 
-.contact-item a {
-    color: #555; /* 链接颜色与文本颜色一致，保持低调 */
-    text-decoration: none;
+.about-content, .blog-section {
+    display: inline-block;
+    width: 80%;
+    box-sizing: border-box;
 }
 
-.contact-item a:hover {
-    text-decoration: underline; /* 鼠标悬停时显示下划线，轻微强调 */
+.blog-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .navbar ul {
-        justify-content: space-around; /* 调整对齐方式以适应小屏幕 */
-        padding: 0 10px; /* 增加左右间距，防止文字太靠边 */
-    }
+.blog-section .articles {
+    max-height: 200px; /* 控制文章列表最大高度 */
+    overflow-y: auto;
+}
 
-    .navbar a {
-        font-size: 16px; /* 在小屏幕上稍微缩小字体 */
-    }
-
-    .navbar li {
-        margin: 0 10px;
-    }
-
-    .hero-text h1 {
-        font-size: 24px;
-    }
-
-    .hero-text p {
-        font-size: 18px;
-    }
-
-    .contact-info {
-        flex-direction: row;
-        justify-content: space-between;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .contact-item {
-        flex: 1;
-        text-align: left;
-    }
+.blog-section .enter-view {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f0a500;
+    padding: 10px;
+    border-radius: 4px;
 }
