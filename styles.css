@@ -9,11 +9,22 @@ body, html {
 }
 
 section {
+    flex-direction:column;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow-x: hidden; /* 禁止垂直方向溢出 */
     position: relative; /* 允许在 section 内定位箭头 */
+}
+
+section h2 {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: black; /* 可以根据需要调整颜色 */
+    z-index: 10; /* 确保标题在内容上方 */
 }
 
 .navbar {
@@ -64,14 +75,17 @@ section {
     color: white;
 }
 
+
 .gallery {
     display: flex;
-    overflow-x: auto; /* 横向滚动 */
+    overflow-x: auto;
     gap: 20px;
     padding: 20px;
-    scroll-snap-type: x mandatory; /* 滚动对齐 */
-    -ms-overflow-style: none;  /* IE 和 Edge 隐藏滚动条 */
-    scrollbar-width: none;  /* Firefox 隐藏滚动条 */
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: calc(100% - 80px); /* 减去箭头的宽度（各40px） */
+    margin: 0 40px; /* 两边各留出40px的空间 */
 }
 
 .gallery-container {
@@ -107,9 +121,22 @@ section {
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    padding: 10px;
+    padding: 20px;
     cursor: pointer;
     z-index: 10;
+    font-size: 24px;
+}
+
+.arrow-left, .arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 24px;
 }
 
 .arrow-left {
@@ -140,30 +167,63 @@ section {
 .about-textbox {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
+    right: 5%; /* 将文本框定位在页面的右边 */
+    transform: translateY(-50%); /* 只在垂直方向上居中对齐 */
+    background-color: rgba(0, 0, 0, 0.8); /* 黑色透明背景 */
     padding: 20px;
-    width: 50%;
-    max-height: 50%;
+    width: 30%; /* 调整宽度，根据需要设置 */
+    height: 80%; /* 调整宽度，根据需要设置 */
+    max-height: 80%; /* 限制高度，根据需要设置 */
     overflow-y: auto;
-    border-radius: 8px;
+    border-radius: 8px; /* 左侧圆角，右侧保持直角 */
 }
 
 .about-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    color: white; /* 改为白色文字，以便在黑色背景上清晰显示 */
 }
 
 /* Blog Section 样式 */
-#about, #blog {
+#about {
     overflow-x: auto; /* 横向滚动 */
     white-space: nowrap;
-    padding: 20px;
 }
 
-.about-content, .blog-section {
+#blog,#works {
+    overflow-x: auto; /* 横向滚动 */
+    white-space: nowrap;
+    padding:20px
+}
+
+.blog-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.blog-section {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: calc(100% - 80px); /* 减去箭头的宽度（各40px） */
+    margin: 0 40px; /* 两边各留出40px的空间 */
+    height: 100%;
+}
+
+.blog-content {
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.about-content{
     display: inline-block;
     width: 80%;
     box-sizing: border-box;
@@ -179,12 +239,66 @@ section {
     overflow-y: auto;
 }
 
-.blog-section .enter-view {
+.enter-view {
     display: block;
-    margin-top: 10px;
+    text-align: left;
+    cursor: pointer;
+    color: gray; /* 灰色文本 */
+    font-size: 14px; /* 较小的字体尺寸 */
+    text-decoration: none;
+    /* padding: 10px; */
+    /* position: absolute; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.enter-view:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+.blog-content {
+    display: flex;
+    flex-direction: column; /* 纵向排列子元素 */
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.blog-content h3 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.blog-content p {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+.articles {
+    flex-grow: 1; /* 占据剩余的垂直空间 */
+    margin-bottom: 10px;
+    overflow-y: auto; /* 文章列表可滚动 */
+}
+
+.enter-view {
+    display: block;
     text-align: center;
     cursor: pointer;
-    background-color: #f0a500;
+    color: gray; /* 灰色文本 */
+    font-size: 14px; /* 较小的字体尺寸 */
+    text-decoration: none;
     padding: 10px;
-    border-radius: 4px;
+    position: relative;
+    margin-top: auto; /* 将查看更多按钮推到最下方 */
+}
+
+.enter-view:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
 }

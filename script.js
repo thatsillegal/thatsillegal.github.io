@@ -119,4 +119,49 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         gallery.scrollBy({ left: event.deltaY < 0 ? -100 : 100 });
     });
+    
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const blogSection = document.querySelector('.blog-section');
+    const blogArrowLeft = document.querySelector('#blog .arrow-left');
+    const blogArrowRight = document.querySelector('#blog .arrow-right');
+    
+    if (blogSection && blogArrowLeft && blogArrowRight) {
+        let currentBlogIndex = 0;
+
+        function updateBlogView() {
+            blogSection.style.transform = `translateX(-${currentBlogIndex * 100}%)`;
+        }
+
+        blogArrowLeft.addEventListener('click', () => {
+            if (currentBlogIndex > 0) {
+                currentBlogIndex--;
+                updateBlogView();
+            }
+        });
+
+        blogArrowRight.addEventListener('click', () => {
+            if (currentBlogIndex < 2) {
+                currentBlogIndex++;
+                updateBlogView();
+            }
+        });
+
+        // 鼠标滚轮事件用于切换博客内容
+        blogSection.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            if (event.deltaY < 0 && currentBlogIndex > 0) {
+                currentBlogIndex--;
+            } else if (event.deltaY > 0 && currentBlogIndex < 2) {
+                currentBlogIndex++;
+            }
+            updateBlogView();
+        });
+
+        // 初始化博客视图
+        updateBlogView();
+    } else {
+        console.error('Blog section or arrows not found.');
+    }
 });
