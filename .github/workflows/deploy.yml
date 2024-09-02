@@ -1,0 +1,27 @@
+name: Deploy to Server
+
+# 定义触发条件为推送到任何分支
+on: 
+  push: 
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # 在 GitHub 提供的最新 Ubuntu 环境中运行
+
+    steps:
+      # 第一步：检出最新代码
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 第二步：使用 SSH 连接到服务器并执行部署脚本
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}  # 使用 GitHub Secrets 中的服务器 IP
+          username: ${{ secrets.SERVER_USER }}  # 使用 GitHub Secrets 中的 SSH 用户名
+          key: ${{ secrets.SERVER_SSH_KEY }}  # 使用 GitHub Secrets 中的 SSH 私钥
+          script: |
+            cd /var/www/mywebsite  # 切换到你的项目目录
+            git pull origin ${{ github.ref_name }}  # 从远程仓库拉取最新代码
