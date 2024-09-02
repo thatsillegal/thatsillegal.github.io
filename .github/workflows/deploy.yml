@@ -13,7 +13,7 @@ jobs:
     steps:
       # 第一步：检出最新代码
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # 第二步：使用 SSH 连接到服务器并执行部署脚本
       - name: Deploy to server via SSH
