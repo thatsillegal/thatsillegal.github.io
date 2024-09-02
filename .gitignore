@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# dotenv environment variables file
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+
+# Optional: Ignore package-lock.json if you prefer not to track it
+# package-lock.json

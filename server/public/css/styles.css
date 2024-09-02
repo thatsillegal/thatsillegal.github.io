@@ -1,0 +1,323 @@
+/* 通用样式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
+}
+
+section {
+    flex-direction:column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* 禁止垂直方向溢出 */
+    position: relative; /* 允许在 section 内定位箭头 */
+}
+
+section h2 {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: black; /* 可以根据需要调整颜色 */
+    z-index: 10; /* 确保标题在内容上方 */
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+}
+
+.navbar ul li a:hover {
+    background-color: #575757;
+}
+
+.hero-image {
+    background-image: url('../images/bg1.png'); /* 在此处替换为你实际的背景图路径 */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+
+/* Home 样式 */
+#home {
+    height: 100vh;
+}
+
+/* About Section 样式 */
+#about {
+    height: 100vh;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    overflow-x: auto; /* 横向滚动 */
+    white-space: nowrap;
+}
+
+.about-bg {
+    background-image: url('../images/about2.png'); /* 替换为你的背景图路径 */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.about-textbox {
+    position: absolute;
+    top: 50%;
+    right: 5%; /* 将文本框定位在页面的右边 */
+    transform: translateY(-50%); /* 只在垂直方向上居中对齐 */
+    background-color: rgba(0, 0, 0, 0.8); /* 黑色透明背景 */
+    padding: 20px;
+    width: 30%; /* 调整宽度，根据需要设置 */
+    height: 80%; /* 调整宽度，根据需要设置 */
+    max-height: 80%; /* 限制高度，根据需要设置 */
+    overflow-y: auto;
+    border-radius: 8px; /* 左侧圆角，右侧保持直角 */
+}
+
+.about-content{
+    display: inline-block;
+    width: 80%;
+    box-sizing: border-box;
+    color: white; /* 改为白色文字，以便在黑色背景上清晰显示 */
+}
+
+
+/* works */
+#works {
+    height: 100vh;
+}
+
+#works-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: calc(100vh - 60px); /* 减去导航栏高度 */
+    overflow-x: auto;
+    overflow-y: hidden; /* 禁用垂直滚动 */
+    scrollbar-width: none; /* 针对 Firefox 隐藏滚动条 */
+}
+
+#works-container::-webkit-scrollbar {
+    display: none; /* 针对 WebKit（如 Chrome, Safari）浏览器隐藏滚动条 */
+}
+
+.work-item {
+    flex: 1 1 auto;
+    width: 25vh; 
+    height: 25vh; /* 每行的高度为屏幕高度的四分之一 */
+    margin: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.work-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    #works-container {
+        flex-direction: row;
+    }
+
+    .work-item {
+        width: calc((100vw - 30px) / 2); /* 在手机上，宽度为屏幕的一半 */
+        height: 50vh; /* 每行的高度为屏幕高度的一半 */
+    }
+}
+
+/* Photo Section 样式 */
+#photography-section {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.photo-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.photo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.photo-info {
+    flex: 1;
+    padding: 20px;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#photo-title {
+    font-size: 2em;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+#photo-description {
+    font-size: 1.2em;
+}
+
+
+
+/* Blog Section 样式 */
+
+#blog {
+    height: 100vh;
+    overflow-x: auto; /* 横向滚动 */
+    white-space: nowrap;
+    padding:20px
+}
+
+.blog-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.blog-section {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: calc(100% - 80px); /* 减去箭头的宽度（各40px） */
+    margin: 0 40px; /* 两边各留出40px的空间 */
+    height: 100%;
+}
+
+.blog-content {
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.blog-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.blog-section .articles {
+    max-height: 200px; /* 控制文章列表最大高度 */
+    overflow-y: auto;
+}
+
+.enter-view {
+    display: block;
+    text-align: left;
+    cursor: pointer;
+    color: gray; /* 灰色文本 */
+    font-size: 14px; /* 较小的字体尺寸 */
+    text-decoration: none;
+    /* padding: 10px; */
+    /* position: absolute; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.enter-view:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+.blog-content {
+    display: flex;
+    flex-direction: column; /* 纵向排列子元素 */
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.blog-content h3 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.blog-content p {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+.articles {
+    flex-grow: 1; /* 占据剩余的垂直空间 */
+    margin-bottom: 10px;
+    overflow-y: auto; /* 文章列表可滚动 */
+}
+
+.enter-view {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    color: gray; /* 灰色文本 */
+    font-size: 14px; /* 较小的字体尺寸 */
+    text-decoration: none;
+    padding: 10px;
+    position: relative;
+    margin-top: auto; /* 将查看更多按钮推到最下方 */
+}
+
+.enter-view:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}

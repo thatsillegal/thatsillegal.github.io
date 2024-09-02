@@ -1,0 +1,13 @@
+{
+    "name": "portfolio-website",
+    "version": "1.0.0",
+    "description": "A portfolio website with left-to-right waterfall layout.",
+    "main": "server/index.js",
+    "scripts": {
+      "start": "node server/index.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+  
